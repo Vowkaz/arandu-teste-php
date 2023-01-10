@@ -2,6 +2,7 @@
 
 namespace App\Contracts;
 
+use App\Constants\Map;
 use App\Constants\Movement;
 
 abstract class GameObject
@@ -54,21 +55,26 @@ abstract class GameObject
      */
     public function move(string $direction): void
     {
+
         switch ($direction) {
             case Movement::arrowUp:
                 $this->_y--;
+                $this->validLimit();
                 break;
 
             case Movement::arrowDown:
                 $this->_y++;
+                $this->validLimit();
                 break;
 
             case Movement::arrowLeft:
                 $this->_x--;
+                $this->validLimit();
                 break;
 
             case Movement::arrowRight:
                 $this->_x++;
+                $this->validLimit();
                 break;
 
             default:
@@ -88,6 +94,22 @@ abstract class GameObject
     {
         $this->_x = $x;
         $this->_y = $y;
+    }
+
+    public function validLimit(): void
+    {
+        if ($this->_x === Map::WIDTH) {
+            $this->_x = 0;
+        }
+        if ($this->_y === Map::HEIGHT) {
+            $this->_y = 0;
+        }
+        if ($this->_x === -1) {
+            $this->_x = Map::WIDTH - 1;
+        }
+        if ($this->_y === -1) {
+            $this->_y = Map::HEIGHT - 1;
+        }
     }
 
     /**
