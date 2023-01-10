@@ -2,6 +2,8 @@
 
 namespace App\Contracts;
 
+use App\Constants\Movement;
+
 abstract class GameObject
 {
     private $_x;
@@ -19,7 +21,7 @@ abstract class GameObject
      *
      * @return int
      */
-    public function x()
+    public function x(): int
     {
         return $this->_x;
     }
@@ -28,7 +30,7 @@ abstract class GameObject
      * Retorna a posição 'Y' no tabuleiro
      * @return int
      */
-    public function y()
+    public function y(): int
     {
         return $this->_y;
     }
@@ -39,7 +41,7 @@ abstract class GameObject
      * @param GameObject $object Objeto para detectar a colisão
      * @return bool
      */
-    public function isCollidingWith(GameObject $object)
+    public function isCollidingWith(GameObject $object): bool
     {
         return $this->_x === $object->_x && $this->_y === $object->_y;
     }
@@ -50,22 +52,22 @@ abstract class GameObject
      * @param string $direction 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'
      * @return void
      */
-    public function move($direction)
+    public function move(string $direction): void
     {
         switch ($direction) {
-            case 'ArrowUp':
+            case Movement::arrowUp:
                 $this->_y--;
                 break;
 
-            case 'ArrowDown':
+            case Movement::arrowDown:
                 $this->_y++;
                 break;
 
-            case 'ArrowLeft':
+            case Movement::arrowLeft:
                 $this->_x--;
                 break;
 
-            case 'ArrowRight':
+            case Movement::arrowRight:
                 $this->_x++;
                 break;
 
@@ -82,7 +84,7 @@ abstract class GameObject
      * @param int $y
      * @return void
      */
-    public function moveTo($x, $y)
+    public function moveTo(int $x, int $y): void
     {
         $this->_x = $x;
         $this->_y = $y;
