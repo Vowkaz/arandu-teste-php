@@ -85,6 +85,8 @@ class GameController extends Controller
             $enemy->moveRandomDirection();
         });
 
+        $this->updateScore();
+
         $this->writeToSession();
     }
 
@@ -93,6 +95,7 @@ class GameController extends Controller
      *
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
+
     public function scene()
     {
         $this->load();
@@ -101,4 +104,13 @@ class GameController extends Controller
         return view('game');
     }
 
+    /**
+     * Funcao para atualizar score conforme as movimentacoes
+     * @return void
+     */
+
+    public function updateScore(): void
+    {
+        $this->score = ($this->score + 10);
+    }
 }

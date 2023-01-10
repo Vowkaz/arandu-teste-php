@@ -1,6 +1,6 @@
 <?php
 
-use App\Constants\Map;
+use App\Http\Controllers\GameController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [\App\Http\Controllers\GameController::class, 'scene'])->name('game');
+Route::get('/', [GameController::class, 'scene'])->name('game');
 
-Route::post('/move', [\App\Http\Controllers\GameController::class, 'update'])->name('move');
+Route::post('/move', [GameController::class, 'update'])->name('move');
 
 Route::get('/gameover', function () {
 
