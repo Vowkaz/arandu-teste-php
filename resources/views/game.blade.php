@@ -402,6 +402,11 @@ border: rgb(0, 0, 0) 1px solid;
 
 @endforeach
 
+@foreach(session('coin') as $coin)
+
+{{$coin->render()}}
+
+@endforeach
 </style>
 
 <script src="{{ asset('js/app.js') }}"></script>
@@ -430,8 +435,6 @@ border: rgb(0, 0, 0) 1px solid;
     </div>
 
     <script>
-
-
         document.addEventListener('keydown', (e) => {
             const { key } = e;
 
@@ -441,7 +444,11 @@ border: rgb(0, 0, 0) 1px solid;
                 data: {
                     key
                 }
-            }).then(() => window.location.reload());
+            }).then((response) => {
+                window.location.reload()
+            }).catch(error => {
+                window.location = '/gameover'
+            });
         });
 
     </script>

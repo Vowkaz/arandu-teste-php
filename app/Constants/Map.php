@@ -27,4 +27,9 @@ class Map
      * @var integer
      */
     const ENEMIES = 40;
+    /**
+     * Número de coin a serem inicalizados
+     * @var integer
+     */
+    const COIN = 1;
 }

@@ -3,27 +3,26 @@
 namespace App\Models;
 
 use App\Constants\Map;
-use App\Constants\Movement;
 use App\Contracts\GameObject;
 
-class Enemy extends GameObject
+class Coin extends GameObject
 {
 
     /**
      * Criar inimigos
      *
      * @param mixed $count O número de inimigos a serem criados
-     * @return array<Enemy>
+     * @return array<coin>
      */
-    static function generateEnemies($count): array
+    static function generateCoins($count): array
     {
-        $enemies = [];
+        $coin = [];
 
         for ($i = 0; $i < $count; $i++) {
-            $enemies[] = new Enemy();
+            $coin[] = new Coin();
         }
 
-        return $enemies;
+        return $coin;
     }
 
     /**
@@ -31,7 +30,7 @@ class Enemy extends GameObject
      *
      * @return array<string,int>
      */
-    public function createRandomPosition()
+    public function createRandomPosition(): array
     {
         return [
             'x' => rand(0, Map::WIDTH - 1),
@@ -59,37 +58,26 @@ class Enemy extends GameObject
 
         parent::__construct($x, $y);
     }
-
     public function render()
     {
-
         $css = "
         .tile-{$this->x()}-{$this->y()} {
-            background-color: blue;
+            background-color: yellow;
         }
         ";
 
         echo $css;
-
     }
 
     /**
-     * Mover o inimigo em uma direção aleatória, com 20% de chance de não se mover.
-     *
+     * Movimenta a moeda para um lugar aleatorio
      * @return void
      */
-    public function moveRandomDirection()
-    {
-        $directions = collect([
-            Movement::arrowUp,
-            Movement::arrowDown,
-            Movement::arrowLeft,
-            Movement::arrowRight,
-            'idle'
-        ]);
-
-        $direction = $directions->random();
-
-        $this->move($direction);
-    }
+//    public function setRandomDirection()
+//    {
+//        $coinMove = [$this->_x = rand(Map::WIDTH - 1, Map::WIDTH),
+//                         $this->_y = rand(Map::WIDTH - 1, Map::WIDTH)
+//        ];
+//        $this->move($coinMove);
+//    }
 }
